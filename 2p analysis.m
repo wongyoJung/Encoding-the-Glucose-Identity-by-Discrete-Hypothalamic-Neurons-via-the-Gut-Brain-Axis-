@@ -24,7 +24,7 @@ aft = 5*60*11;
 
 %% get Z-score from the responses of each mice & align to the first lick
 % draw heatmap plot of stimulus 1 (eg. SO), stimulus 2 (eg.SA)
-% you can draw calcium trace of individual cells (ex Fig 3C) by manually picking the
+% you can draw calcium trace of individual cells (ex Fig 4C) by manually picking the
 % cell and command like this.
 
 % caclium_trace = zscore_1(i); %i is the index of the selected cells
@@ -74,7 +74,7 @@ drawHM_aligned(Data_SA,'zscore',bef,aft);
 title('Lipid');
 
 
-%% sort by average & draw heatmap ex) Fig S3C
+%% sort by average & draw heatmap ex) Fig 4B
 zscore_avg_1 = mean(Data_SO(:,bef+1:end),2);
 zscore_avg_2 = mean(Data_SA(:,bef+1:end),2);
 
@@ -100,11 +100,11 @@ drawHM_aligned(empty_2,'zscore',bef,aft);
 title('Fasted Protein');
 
 
-%% divide into k means & draw each heatmap and pie graph; ex) Fig 3B, 3D
+%% divide into k means & draw each heatmap and pie graph; ex) Fig 4D-4E
 sortKmeans_multi_eval(Data_SA,Data_SO,bef,aft);
 
 
-%% divide according to response to two stimuli; Fig 3G
+%% divide according to response to two stimuli; Fig 4G
 % clust 1 : data1 inh and data2 activated
 % clust2 : data1 inh and data2 not act
 % clust 3: data 1 not inh and data2 act
@@ -113,7 +113,7 @@ sortKmeans_multi_eval(Data_SA,Data_SO,bef,aft);
 [data1_clust1,data1_clust2, data1_clust3, data1_clust4,data2_clust1,data2_clust2, data2_clust3, data2_clust4 ] = getResponsiveSort(Data_SO,Data_SA,bef);
 data1_mean1 = data1_clust1(bef:bef+10*5*60);
 
-%% tuning preference curve; ex) Fig 3J
+%% tuning preference curve; ex) Fig 4J
 tuningPreference(Data_SO,Data_SA,bef);
 ylabel('Percent of cells (%)');
 
@@ -238,7 +238,7 @@ avgplot(Data_SA,no_res_color,bef)
 
 
 
-%% draw pie chart from data 1; ex) Fig 3E
+%% draw pie chart from data 1; ex) Fig 4E
 [ses1_act, ses1_inh, ses1_nores] = getResponsive(Data_SO,bef);
 if(length(ses1_act))
     avgplot(ses1_act,act_color,bef)
@@ -255,7 +255,7 @@ drawpie(ses1_act,ses1_inh,ses1_nores);
 
 
 
-%% draw pie chart from data 2; ex) Fig 3E
+%% draw pie chart from data 2; ex) Fig 4E
 
 [ses2_act, ses2_inh, ses2_nores] = getResponsive(empty_2,bef);
 if(length(ses2_act))
@@ -273,7 +273,7 @@ drawpie(ses2_act,ses2_inh,ses2_nores);
 
 
 
-%% scatter plot of response of each cell to two stimuli; ex) Fig 3F
+%% scatter plot of response of each cell to two stimuli; ex) Fig 4F
 comparison=[]
 comp_1=[];
 comp_2=[];
@@ -357,7 +357,7 @@ mdl.Rsquared.Ordinary
 
 
 
-%% SVM-decoder time bin; ex) Fig 3H
+%% SVM-decoder time bin; ex) Fig 4H
 window = 5;
 accuracies=[];
 acc1 = svmDecoderTimebin(zscore_aligned_1,zscore_aligned_2,window);
@@ -397,7 +397,7 @@ title('Dglu-Lglu decoder shuffle accuracy');
 legend('Dglu vs Lglu','shuffled');
 ylim([30 100]);
 
-%% SVM decoder without specific k-means clusters; ex) Fig 3I
+%% SVM decoder without/onlywith specific k-means clusters; ex) Fig 4I
 
 acc_clust1 = svmDecoderTimebin_clust_wo(zscore_aligned_1,zscore_aligned_2,bef,window);
 acc_clust2 = svmDecoderTimebin_clust_wo(zscore_aligned_3,zscore_aligned_4,bef,window);
