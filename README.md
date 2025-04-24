@@ -1,4 +1,2 @@
 # 2p-anal-matlab
-This is repository for analysis of single-cell calcium trace for the paper to be submitted. 
-
-final data is located at D:\twophoton\P0
+This is repository for analysis of single-cell calcium trace for the paper - Encoding the Glucose Identity by Discrete Hypothalamic Neurons via the Gut-Brain Axis
